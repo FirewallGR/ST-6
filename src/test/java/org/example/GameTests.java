@@ -125,8 +125,8 @@ public class GameTests {
     public void TestCorrMoves() {
         game.board = new char[] {
                 'X', 'X', ' ',
-                ' ', 'O', 'X',
-                ' ', ' ', 'X'};
+                'O', 'O', 'X',
+                'O', 'O', 'X'};
         int move = game.MiniMax(game.board, game.player2);
         assertTrue(move >= 1 && move <= 9);
     }
