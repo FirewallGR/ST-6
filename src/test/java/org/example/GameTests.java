@@ -10,38 +10,54 @@ public class GameTests {
     private Game game;
 
     @BeforeEach
-    public void setUp() {
+    public void Setup() {
         game = new Game();
     }
 
     @Test
-    public void checkState_XWIN_Test() {
-        char[] board = { 'X', 'O', 'X', 'O', 'X', 'O', 'X', ' ', ' ' };
+    public void TestCrossWins() {
+        char[] board = {
+                'X', 'O', 'X',
+                'O', 'X', 'O',
+                ' ', ' ', 'X'
+        };
         game.symbol = 'X';
         assertEquals(game.checkState(board), State.XWIN);
     }
 
     @Test
-    public void checkState_OWIN_Test() {
-        char[] board = { 'X', 'O', 'X', ' ', 'O', 'X', ' ', 'O', ' ' };
+    public void TestZerosWins() {
+        char[] board = {
+                'O', 'X', ' ',
+                ' ', 'O', 'X',
+                'X', ' ', 'O'
+        };
         game.symbol = 'O';
         assertEquals(game.checkState(board), State.OWIN);
     }
 
     @Test
-    public void checkState_DRAW_Test() {
-        char[] board = { 'X', 'O', 'X', 'X', 'O', 'O', 'O', 'X', 'X' };
+    public void TestDraw() {
+        char[] board = {
+                'X', 'O', 'X',
+                'X', 'O', 'O',
+                'O', 'X', 'X'
+        };
         assertEquals(game.checkState(board), State.DRAW);
     }
 
     @Test
-    public void checkState_PLAYING_Test() {
-        char[] board = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
+    public void TestGameStarted() {
+        char[] board = {
+                ' ', ' ', ' ',
+                ' ', ' ', ' ',
+                ' ', ' ', ' '
+        };
         assertEquals(game.checkState(board), State.PLAYING);
     }
 
     @Test
-    public void initialGameState_Test() {
+    public void TestGameInit() {
         assertEquals(game.state, State.PLAYING);
         assertEquals(game.player1.symbol, 'X');
         assertEquals(game.player2.symbol, 'O');
@@ -51,14 +67,14 @@ public class GameTests {
 
     
     @Test
-    public void generateMoves_EmptyArray_Test() {
+    public void TestGenMovesEmpty() {
         ArrayList<Integer> moves = new ArrayList<>();
         game.generateMoves(game.board, moves);
         assertEquals(9, moves.size());
     }
 
     @Test
-    public void generateMoves_OneRow_Test() {
+    public void TestGenMovesRow() {
         game.board[0] = 'X';
         game.board[1] = 'X';
         game.board[2] = 'X';
@@ -68,21 +84,25 @@ public class GameTests {
     }
 
     @Test
-    public void evaluatePosition_Playing_Test() {
+    public void TestPlayingPos() {
         int result = game.evaluatePosition(game.board, game.player1);
         assertEquals(-1, result);
     }
 
     @Test
-    public void evaluatePosition_Draw_Test() {
+    public void TestDrawPos() {
         game.symbol = 'X';
-        game.board = new char[] {'X', 'X', 'O', 'O', 'O', 'X', 'X', 'X', 'O'};
+        game.board = new char[] {
+                'X', 'X', 'O',
+                'O', 'O', 'X',
+                'X', 'X', 'O'
+        };
         int result = game.evaluatePosition(game.board, game.player1);
         assertEquals(0, result);
     }
 
     @Test
-    public void evaluatePosition_Player1Win_Test() {
+    public void TestPosPlayerOneWin() {
         game.symbol = 'X';
         game.board[0] = game.player1.symbol;
         game.board[1] = game.player1.symbol;
@@ -92,7 +112,7 @@ public class GameTests {
     }
 
     @Test
-    public void evaluatePosition_Player1Lose_Test() {
+    public void TestPosPlayerOneLoose() {
         game.symbol = 'O';
         game.board[0] = game.player2.symbol;
         game.board[1] = game.player2.symbol;
@@ -102,8 +122,11 @@ public class GameTests {
     }
 
     @Test
-    public void miniMax_Test() {
-        game.board = new char[] {'X', 'X', ' ', ' ', 'O', 'X', ' ', ' ', 'X'};
+    public void TestCorrMoves() {
+        game.board = new char[] {
+                'X', 'X', ' ',
+                ' ', 'O', 'X',
+                ' ', ' ', 'X'};
         int move = game.MiniMax(game.board, game.player2);
         assertTrue(move >= 1 && move <= 9);
     }
