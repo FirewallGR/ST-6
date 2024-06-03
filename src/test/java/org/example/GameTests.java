@@ -10,12 +10,12 @@ public class GameTests {
     private Game game;
 
     @BeforeEach
-    public void Setup() {
+    public void setup() {
         game = new Game();
     }
 
     @Test
-    public void TestCrossWins() {
+    public void testCrossWins() {
         char[] board = {
                 'X', 'O', 'X',
                 'O', 'X', 'O',
@@ -26,7 +26,7 @@ public class GameTests {
     }
 
     @Test
-    public void TestZerosWins() {
+    public void testZerosWins() {
         char[] board = {
                 'O', 'X', ' ',
                 ' ', 'O', 'X',
@@ -37,7 +37,7 @@ public class GameTests {
     }
 
     @Test
-    public void TestDraw() {
+    public void testDraw() {
         char[] board = {
                 'X', 'O', 'X',
                 'X', 'O', 'O',
@@ -47,7 +47,7 @@ public class GameTests {
     }
 
     @Test
-    public void TestGameStarted() {
+    public void testGameStarted() {
         char[] board = {
                 ' ', ' ', ' ',
                 ' ', ' ', ' ',
@@ -57,7 +57,7 @@ public class GameTests {
     }
 
     @Test
-    public void TestGameInit() {
+    public void testGameInit() {
         assertEquals(game.state, State.PLAYING);
         assertEquals(game.player1.symbol, 'X');
         assertEquals(game.player2.symbol, 'O');
@@ -67,14 +67,14 @@ public class GameTests {
 
     
     @Test
-    public void TestGenMovesEmpty() {
+    public void testGenMovesEmpty() {
         ArrayList<Integer> moves = new ArrayList<>();
         game.generateMoves(game.board, moves);
         assertEquals(9, moves.size());
     }
 
     @Test
-    public void TestGenMovesRow() {
+    public void testGenMovesRow() {
         game.board[0] = 'X';
         game.board[1] = 'X';
         game.board[2] = 'X';
@@ -84,13 +84,13 @@ public class GameTests {
     }
 
     @Test
-    public void TestPlayingPos() {
+    public void testPlayingPos() {
         int result = game.evaluatePosition(game.board, game.player1);
         assertEquals(-1, result);
     }
 
     @Test
-    public void TestDrawPos() {
+    public void testDrawPos() {
         game.symbol = 'X';
         game.board = new char[] {
                 'X', 'X', 'O',
@@ -102,7 +102,7 @@ public class GameTests {
     }
 
     @Test
-    public void TestPosPlayerOneWin() {
+    public void testPosPlayerOneWin() {
         game.symbol = 'X';
         game.board[0] = game.player1.symbol;
         game.board[1] = game.player1.symbol;
@@ -112,7 +112,7 @@ public class GameTests {
     }
 
     @Test
-    public void TestPosPlayerOneLoose() {
+    public void testPosPlayerOneLoose() {
         game.symbol = 'O';
         game.board[0] = game.player2.symbol;
         game.board[1] = game.player2.symbol;
@@ -122,7 +122,7 @@ public class GameTests {
     }
 
     @Test
-    public void TestCorrMoves() {
+    public void testCorrMoves() {
         game.board = new char[] {
                 'X', 'X', ' ',
                 'O', 'O', 'X',

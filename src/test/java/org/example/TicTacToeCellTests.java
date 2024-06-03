@@ -8,12 +8,12 @@ public class TicTacToeCellTests {
     private TicTacToeCell cell;
 
     @BeforeEach
-    public void Setup() {
+    public void setup() {
         cell = new TicTacToeCell(0, 0, 0);
     }
 
     @Test
-    public void TestCellStateInit() {
+    public void testCellStateInit() {
         assertEquals(' ', cell.getMarker());
         assertEquals(0, cell.getNum());
         assertEquals(0, cell.getRow());
@@ -21,22 +21,22 @@ public class TicTacToeCellTests {
     }
 
     @Test
-    public void TestGetNum() {
+    public void testGetNum() {
         assertEquals(0, cell.getNum());
     }
 
     @Test
-    public void TestGetRow() {
+    public void testGetRow() {
         assertEquals(0, cell.getRow());
     }
 
     @Test
-    public void TestGetCol() {
+    public void testGetCol() {
         assertEquals(0, cell.getCol());
     }
 
     @Test
-    public void TestSetMarker() {
+    public void testSetMarker() {
         cell.setMarker("X");
         assertEquals('X', cell.getMarker());
         assertFalse(cell.isEnabled());
